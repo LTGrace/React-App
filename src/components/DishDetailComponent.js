@@ -16,7 +16,7 @@ import {Control,LocalForm,Errors} from 'react-redux-form';
         );
     }
 
-   function RenderComments({comments}){
+   function RenderComments({comments,addComment,dishId}){
         var commentList = comments.map(comment =>{
             return(
                 <li key = {comment.id}>
@@ -33,7 +33,7 @@ import {Control,LocalForm,Errors} from 'react-redux-form';
                 <ul className = "list-unstyled">
                     {commentList}
                 </ul>
-                <CommentForm />
+                <CommentForm dishId = {dishId} addComment = {addComment} />
             </div>
         );
     }
@@ -57,7 +57,9 @@ import {Control,LocalForm,Errors} from 'react-redux-form';
                             <RenderDish dish = {props.dish} />
                         </div>
                         <div className="col-12 col-md-5 m-1">
-                            <RenderComments comments = {props.comments} />
+                            <RenderComments comments = {props.comments}
+                                addComment = {props.addComment}
+                                dishId = {props.dish.id} />
                         </div>
                     </div>
                 </div>
@@ -90,8 +92,7 @@ export class CommentForm extends Component {
     }
     handleSubmit(values){
         this.toggleModal();
-        console.log("Current State is:" + JSON.stringify(values));
-        alert("Current State is:" + JSON.stringify(values));
+        this.props.addComment(this.props.dishId,values.rating,values.author,values.comment)
     }
     render(){
         return(
@@ -99,7 +100,7 @@ export class CommentForm extends Component {
                 <Button outline onClick = {this.toggleModal}>
                 <span className = "fa fa-pencil fa-lg"></span>Submit Comment   
                 </Button>
-                <div class = "row row-content">
+                <div className = "row row-content">
                     <Modal isOpen = {this.state.isModalOpen} toggle = {this.state.toggleModal}>
                         <ModalHeader toggle = {this.toggleModal}>Submit Comment</ModalHeader>
                         <ModalBody>
@@ -109,9 +110,9 @@ export class CommentForm extends Component {
                                 </Row>
                                 <Row>
                                     <Control.select model = ".rating"  name = "rating" 
-                                        className = "form-control" 
+                                        className = "form-control" defaultValue = "1"
                                     >
-                                        <option default selected disabled></option>
+                                        
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
