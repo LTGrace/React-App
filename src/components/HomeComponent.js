@@ -15,6 +15,7 @@ function RenderCard({item,isLoading,errMess}){
             );
         }
         else{
+            console.log(item.name);
             return (
                 <FadeTransform in
                     transfromProps ={{
@@ -52,7 +53,7 @@ function Home(props){
                 </div>
                 <div className = "col-12 col-md m-1">
                     <RenderCard item = {props.leader}
-                        isLoading = {props.leadersisLoading}
+                        isLoading = {props.leadersLoading}
                         errMess = {props.leadersErrMess}
                     >
                     </RenderCard>
