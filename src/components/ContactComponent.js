@@ -16,8 +16,9 @@ class  Contact extends Component{
     }
     
     handleSubmit(values){
+        this.props.postFeedback(values.firstname,values.lastname,values.telnum,values.email,values.agree,values.contactType,values.message);
         console.log("Current State is:" + JSON.stringify(values));
-        alert("Current State is:" + JSON.stringify(values));
+        //alert("Current State is:" + JSON.stringify(values));
         //this.props.resetFeedbackForm();
         // event.preventDefault();
     }
@@ -114,7 +115,7 @@ class  Contact extends Component{
                             <Row className = "form-group">
                                 <Label htmlFor = "telnum" md={2}>Contact Tel.</Label>
                                 <Col md={10}>
-                                    <Control.text model = ".tel" id = "telnum" name = "telnum"
+                                    <Control.text model = ".telnum" id = "telnum" name = "telnum"
                                         placeholder = "Tel. Number"
                                         className = "form-control"
                                         validators = {{
@@ -123,7 +124,7 @@ class  Contact extends Component{
                                          />
                                     <Errors 
                                         className = "text-danger"
-                                        model = ".tel"
+                                        model = ".telnum"
                                         show = "touched"
                                         messages ={{
                                             required: 'Required  ',
