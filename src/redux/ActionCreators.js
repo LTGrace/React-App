@@ -43,10 +43,7 @@ export const postComment = (dishId,rating,author,comment) => (dispatch) =>{
     });
 }
 
-export const addFeedback = (feedback) => ({
-    type:ActionTypes.ADD_FEEDBACK,
-    payload:feedback
-})
+
 
 export const postFeedback = (firstname,lastname,telnum,email,agree,contactType,message) => (dispatch) => {
     const newFeedback = {
@@ -81,8 +78,9 @@ export const postFeedback = (firstname,lastname,telnum,email,agree,contactType,m
                 })
             .then(response => response.json())
             .then(feedback => {
-                    dispatch(addFeedback(feedback));
+                    //dispatch(addFeedback(feedback));
                     console.log(feedback);
+                    alert(JSON.stringify(feedback));
                 })
             .catch(error => {console.log('Post feedbacks ',error.message)
                     alert('Your feedback could not be posted \n Error: ' + error.message)
